@@ -21,11 +21,11 @@ namespace googletranslate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            output.Text = translate(input.Text, "en","si");
+            output.Text = translate(input.Text, from.Text, to.Text);
         }
         public String translate(String input, string from, string to)
         {
-            var fromLanguage = from; //si for sinhala and en for english
+            var fromLanguage = from; // en to english and si to sinhala
             var toLanguage = to;
             var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromLanguage}&tl={toLanguage}&dt=t&q={HttpUtility.UrlEncode(input)}";
             var webclient = new WebClient
@@ -39,12 +39,23 @@ namespace googletranslate
                     , StringComparison.Ordinal) - 4);
                 return result;
             }
-            catch(Exception e1)
+            catch (Exception e1)
             {
                 return "error";
             }
 
-        
+
+        }
+
+        private void from_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            from.Text = "en";
+            to.Text = "si";
         }
     }
 }
